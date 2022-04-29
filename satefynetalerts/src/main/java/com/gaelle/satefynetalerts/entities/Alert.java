@@ -1,9 +1,12 @@
 package com.gaelle.satefynetalerts.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,8 +21,8 @@ public class Alert {
     @NotEmpty
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    private Date created_at;
+    @NotNull
+    private LocalDate created_at;
 
     @Enumerated(EnumType.STRING)
     private StatusEnum status;
@@ -27,12 +30,17 @@ public class Alert {
     @Enumerated(EnumType.STRING)
     private TypeEnum type;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private Address address;
+
     @OneToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<Person> personList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private FireStation fireStation;
-
 
 
 }

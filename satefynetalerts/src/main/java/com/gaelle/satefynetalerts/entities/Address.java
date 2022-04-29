@@ -33,8 +33,13 @@ public class Address {
     @Size(max = 5)
     private String zip;
 
-//    @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<Person> personList = new ArrayList<>();
-
+    @Override
+    public String toString() {
+        return "Address{" +
+                "address='" + address + '\'' +
+                ", city='" + city + '\'' +
+                ", zip='" + zip + '\'' +
+                '}';
+    }
 
 }

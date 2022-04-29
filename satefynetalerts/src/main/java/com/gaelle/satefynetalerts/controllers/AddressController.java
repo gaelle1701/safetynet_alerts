@@ -38,8 +38,9 @@ public class AddressController {
         return new ResponseEntity<>(updatedAddress, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public void deleteAddress(@PathVariable("id") Long id) {
-        addressService.deleteAddress(id);
-    }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public void deleteAddress(@PathVariable("id") Long id) {
+//        addressService.deleteAddress(id);
+//    }
 }

@@ -34,6 +34,22 @@ public class FireStationServiceImpl implements FireStationService {
     }
 
     @Override
+    public FireStation getFireStationByAddress(Long id) {
+        List<FireStation> fireStations = fireStationRepository.findAll();
+        Address currentAddress = addressRepository.findById(id).get();
+        FireStation fireStationToReturn = null;
+        for (FireStation fireStation : fireStations) {
+            List<Address> addresses = fireStation.getAddressList();
+            for (Address address : addresses) {
+                if (address == currentAddress) {
+                    fireStationToReturn = fireStation;
+                }
+            }
+        }
+        return fireStationToReturn;
+    }
+
+    @Override
     public FireStation createFireStation(FireStation fireStation) {
        List<Address> addressList = new ArrayList<>();
        FireStation newFireStation= new FireStation();

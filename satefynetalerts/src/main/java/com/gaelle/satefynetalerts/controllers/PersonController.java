@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,7 @@ public class PersonController {
     private RoleRepository roleRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<Person>> getPersons(@RequestParam(required = false) String birthdate) {
+    public ResponseEntity<List<Person>> getPersons(@RequestParam(required = false) String birthdate) throws ParseException {
         List<Person> persons;
         if (birthdate != null)  {
             persons = personService.getPersonsByBirthdate(birthdate);
@@ -44,6 +45,7 @@ public class PersonController {
         Person newPerson = personService.createPerson(personDto, role);
         return new ResponseEntity<>(newPerson, HttpStatus.CREATED);
     }
+
     @PostMapping("create/admin")
     public ResponseEntity<Person> createAdmin(@RequestBody PersonDto person) {
         Role role = roleRepository.getById(2);

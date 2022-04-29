@@ -1,5 +1,6 @@
 package com.gaelle.satefynetalerts.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jsoniter.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,7 @@ public class Person {
     private String password;
 
     @NotNull
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date birthdate;
 
     @ElementCollection(fetch = FetchType.LAZY)

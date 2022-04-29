@@ -8,8 +8,9 @@ import java.util.List;
 public interface FireStationService {
     FireStation getFireStation(Long id);
 
-//    FireStation getFireStationsByAddress(String address);
     List<FireStation> getFireStations();
+
+    FireStation getFireStationByAddress(Long id);
 
     FireStation createFireStation(FireStation fireStation);
 

@@ -20,7 +20,7 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getAddressById(Address address){
+    public Address getAddress(Address address){
         return addressRepository.getById(address.getId());
     }
 
@@ -36,9 +36,7 @@ public class AddressServiceImpl implements AddressService {
             }else{
                 System.out.println("Cette adresse existe déjà !");
             }
-
         }
-        System.out.println("Adresse créée ============================> " + address);
         return address;
     }
 
@@ -46,10 +44,10 @@ public class AddressServiceImpl implements AddressService {
     public Address updateAddress(Address address) {
         return addressRepository.save(address);
     }
-
-    @Override
-    public void deleteAddress(Long id) {
-
-    }
+//
+//    @Override
+//    public void deleteAddress(Long id) {
+//
+//    }
 
 }

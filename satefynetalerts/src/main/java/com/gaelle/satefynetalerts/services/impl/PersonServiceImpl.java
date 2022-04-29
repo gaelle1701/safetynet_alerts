@@ -5,12 +5,17 @@ import com.gaelle.satefynetalerts.entities.Address;
 import com.gaelle.satefynetalerts.entities.Person;
 import com.gaelle.satefynetalerts.entities.PersonId;
 import com.gaelle.satefynetalerts.entities.Role;
+import com.gaelle.satefynetalerts.repositories.AddressRepository;
 import com.gaelle.satefynetalerts.repositories.PersonRepository;
 import com.gaelle.satefynetalerts.services.AddressService;
 import com.gaelle.satefynetalerts.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,11 +24,23 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private AddressService addressService;
     @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
     private PersonRepository personRepository;
 
     @Override
-    public List<Person> getPersonsByBirthdate(String birthdate) {
-        return null;
+    public List<Person> getPersonsByBirthdate(String birthdate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        List<Person> persons = personRepository.findAll();
+        List<Person> personList = new ArrayList<>();
+        for (Person person: persons) {
+            Date currentBirthdate = sdf.parse(birthdate);
+            int result = currentBirthdate.compareTo(person.getBirthdate());
+            if(result==0){
+                personList.add(person);
+            }
+        }
+        return personList;
     }
 
     @Override
@@ -40,7 +57,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public Person createPerson(PersonDto personDto, Role role) {
         Person newPerson = new Person();
-        Address address = addressService.getAddressById(personDto.getAddress());
+        Address address = addressService.getAddress(personDto.getAddress());
         newPerson.setPersonId(personDto.toPersonId());
         newPerson.setFirstName(personDto.getFirstName());
         newPerson.setEmail(personDto.getEmail());
@@ -61,6 +78,19 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public void deletePerson(Long personId) {
+    }
 
+    @Override
+    public List<Person> getPersonListByAddress(Long id) {
+        List<Person> persons = personRepository.findAll();
+        List<Person> personList = new ArrayList<>();
+        Address currentAddress = addressRepository.findById(id).get();
+        for (Person person  : persons) {
+            Address address = person.getAddress();
+            if (address == currentAddress) {
+                personList.add(person);
+            }
+        }
+        return personList;
     }
 }
