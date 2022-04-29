@@ -6,11 +6,9 @@ import java.util.List;
 
 public interface AddressService {
 
-   Address getAddress(Long id);
+   Address getAddressById(Address address);
    List<Address> getAddresses();
    Address createAddress(Address address);
-   Address updateAddress(Address address);
+   Address updateAddress(Address addressToUpdate);
    void deleteAddress(Long id);
-
-   //    List<Address> getAddressBy(String genre)
 }

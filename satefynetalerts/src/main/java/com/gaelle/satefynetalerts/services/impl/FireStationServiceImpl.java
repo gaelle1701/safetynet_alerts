@@ -61,6 +61,4 @@ public class FireStationServiceImpl implements FireStationService {
             fireStationRepository.delete(fireStation);
         }
     }
-
-
 }

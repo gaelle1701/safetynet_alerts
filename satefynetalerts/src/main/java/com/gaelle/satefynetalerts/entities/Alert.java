@@ -30,8 +30,9 @@ public class Alert {
     @OneToMany(fetch = FetchType.LAZY)
     private List<Person> personList = new ArrayList<>();
 
-//    @ManyToOne
-//    private Type type;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private FireStation fireStation;
+
 
 
 }

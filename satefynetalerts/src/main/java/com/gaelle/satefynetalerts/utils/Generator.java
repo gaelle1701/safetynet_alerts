@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -61,14 +64,22 @@ public class Generator {
                 allergyList.add(allergy.toString());
             }
 
+            PersonId personId = new PersonId(a.get("lastName").toString(), a.get("phone").toString());
+            Date date = new Date();
+            try {
+                date = new SimpleDateFormat("dd/MM/yyyy").parse(a.get("birthdate").toString());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
             Person person = new Person(
-                    null,
-                    a.get("lastName").toString(),
-                    a.get("email").toString(),
+                    personId,
+//                    a.get("lastName").toString(),
                     a.get("firstName").toString(),
-                    a.get("phone").toString(),
+                    a.get("email").toString(),
+//                    a.get("phone").toString(),
                     a.get("password").toString(),
-                    a.get("birthdate").toString(),
+                    date,
                     medocList,
                     allergyList,
                     address,
@@ -131,8 +142,7 @@ public class Generator {
             FireStation fireStation = new FireStation(
                     null,
                     station,
-                    addresses,
-                    null
+                    addresses
             );
             this.fireStationRepository.save(fireStation);
         }

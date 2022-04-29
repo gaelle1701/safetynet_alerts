@@ -12,14 +12,7 @@ import java.util.Optional;
 @Service
 public class AddressServiceImpl implements AddressService {
     @Autowired
-    AddressRepository addressRepository;
-
-    @Override
-    public Address getAddress(Long id) {
-        Optional<Address> address = addressRepository.findById(id);
-        System.out.println("Address by Id in service --> " +address);
-        return null;
-    }
+    private AddressRepository addressRepository;
 
     @Override
     public List<Address> getAddresses() {
@@ -27,14 +20,26 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
+    public Address getAddressById(Address address){
+        return addressRepository.getById(address.getId());
+    }
+
+    @Override
     public Address createAddress(Address address) {
-        try{
-            Address newAddress = addressRepository.save(address);
-            return newAddress;
-        }catch (Exception e){
-            System.out.println(e);
-            return null;
+        List<Address> addressList = addressRepository.findAll();
+        for (Address existingAddress: addressList) {
+            if((existingAddress.getAddress() != address.getAddress())
+                    && (existingAddress.getCity() != address.getCity())
+                    && (existingAddress.getZip() != address.getZip()))
+            {
+                addressRepository.save(address);
+            }else{
+                System.out.println("Cette adresse existe déjà !");
+            }
+
         }
+        System.out.println("Adresse créée ============================> " + address);
+        return address;
     }
 
     @Override
@@ -44,11 +49,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public void deleteAddress(Long id) {
-        Optional<Address> addressOptional = addressRepository.findById(id);
-        Address address = null;
-        if (addressOptional.isPresent()) {
-            address = addressOptional.get();
-            addressRepository.delete(address);
-        }
+
     }
+
 }
