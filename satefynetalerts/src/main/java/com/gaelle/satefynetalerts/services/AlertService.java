@@ -13,4 +13,5 @@ public interface AlertService {
     Alert createAlert(Alert alert);
 
     Alert updateAlert(Alert alertToUpdate);
+
 }

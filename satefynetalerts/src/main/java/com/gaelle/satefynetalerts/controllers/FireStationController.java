@@ -1,26 +1,24 @@
 package com.gaelle.satefynetalerts.controllers;
 
 import com.gaelle.satefynetalerts.entities.FireStation;
-import com.gaelle.satefynetalerts.repositories.FireStationRepository;
-import com.gaelle.satefynetalerts.services.AddressService;
 import com.gaelle.satefynetalerts.services.FireStationService;
+import com.gaelle.satefynetalerts.services.UrlsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/firestation")
 public class FireStationController {
 
     @Autowired
-    FireStationRepository fireStationRepository;
+    private FireStationService fireStationService;
     @Autowired
-    FireStationService fireStationService;
-    @Autowired
-    AddressService addressService;
+    private UrlsService urlsService;
 
     @GetMapping("")
     public ResponseEntity<List<FireStation>> getFireStations(){
@@ -37,6 +35,12 @@ public class FireStationController {
     public FireStation getFireStationByAddress(@RequestParam(required = false) Long id) {
         FireStation fireStation = fireStationService.getFireStationByAddress(id);
         return fireStation;
+    }
+
+    @GetMapping("/station")
+    public Map<String, Object> getFireStationByStation(@RequestParam("station") String station){
+        Map<String, Object> countPerson = urlsService.getFireStationByStationNumber(station);
+        return countPerson;
     }
 
     @PostMapping("/create")
@@ -63,4 +67,5 @@ public class FireStationController {
 //    doit inclure les informations spécifiques suivantes : prénom, nom, adresse, numéro de téléphone. De plus,
 //    elle doit fournir un décompte du nombre d'adultes et du nombre d'enfants (tout individu âgé de 18 ans ou
 //            moins) dans la zone desservie.
+//    List<Person> station + lastName, firstName, phone, address + nbr person birthadate > 18, nbr pesron < 18
 }

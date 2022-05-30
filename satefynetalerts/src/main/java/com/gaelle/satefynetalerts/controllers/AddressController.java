@@ -15,9 +15,9 @@ import java.util.List;
 public class AddressController {
 
     @Autowired
-    AddressRepository addressRepository;
+    private AddressRepository addressRepository;
     @Autowired
-    AddressService addressService;
+    private AddressService addressService;
 
 
     @GetMapping("")

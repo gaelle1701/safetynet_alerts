@@ -3,11 +3,13 @@ package com.gaelle.satefynetalerts.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jsoniter.annotation.JsonIgnore;
+import com.jsoniter.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,8 +33,9 @@ public class Person {
     @NotEmpty
     private String email;
 
-    @NotEmpty
+    @NotBlank
     @JsonIgnore
+    @JsonProperty(value = "password")
     private String password;
 
     @NotNull

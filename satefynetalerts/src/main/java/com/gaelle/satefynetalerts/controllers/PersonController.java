@@ -1,6 +1,7 @@
 package com.gaelle.satefynetalerts.controllers;
 
 import com.gaelle.satefynetalerts.dto.PersonDto;
+import com.gaelle.satefynetalerts.entities.Address;
 import com.gaelle.satefynetalerts.entities.Person;
 import com.gaelle.satefynetalerts.entities.PersonId;
 import com.gaelle.satefynetalerts.entities.Role;
@@ -37,6 +38,12 @@ public class PersonController {
     public Person getPerson(@PathVariable("lastname") String lastname, @PathVariable("phone") String phone) {
         PersonId personId = new PersonId(lastname, phone);
         return personService.getPerson(personId);
+    }
+
+    @GetMapping("/address")
+    public ResponseEntity<List<Person>> getPersonListByAddress(@RequestParam(required = false) Long id) {
+        List<Person> personList = personService.getPersonListByAddress(id);
+        return ResponseEntity.ok(personList);
     }
 
     @PostMapping("create/user")

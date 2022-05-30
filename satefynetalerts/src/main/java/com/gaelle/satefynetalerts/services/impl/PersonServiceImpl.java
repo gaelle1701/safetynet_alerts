@@ -14,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -27,6 +24,7 @@ public class PersonServiceImpl implements PersonService {
     private AddressRepository addressRepository;
     @Autowired
     private PersonRepository personRepository;
+
 
     @Override
     public List<Person> getPersonsByBirthdate(String birthdate) throws ParseException {
@@ -55,6 +53,32 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
+    public List<Person> getPersonListByAddress(Long id) {
+        List<Person> persons = personRepository.findAll();
+        List<Person> personList = new ArrayList<>();
+        Address currentAddress = addressRepository.findById(id).get();
+        for (Person person  : persons) {
+            Address address = person.getAddress();
+            if (address == currentAddress) {
+                personList.add(person);
+            }
+        }
+        return personList;
+    }
+
+    @Override
+    public List<String> getEmailList(String city) {
+        List<String> emailList = new ArrayList<>();
+
+        for (Person person : personRepository.findAll()) {
+            if (person.getAddress().getCity().equals(city))
+                emailList.add(person.getEmail());
+        }
+        return emailList;
+    }
+
+
+    @Override
     public Person createPerson(PersonDto personDto, Role role) {
         Person newPerson = new Person();
         Address address = addressService.getAddress(personDto.getAddress());
@@ -80,17 +104,4 @@ public class PersonServiceImpl implements PersonService {
     public void deletePerson(Long personId) {
     }
 
-    @Override
-    public List<Person> getPersonListByAddress(Long id) {
-        List<Person> persons = personRepository.findAll();
-        List<Person> personList = new ArrayList<>();
-        Address currentAddress = addressRepository.findById(id).get();
-        for (Person person  : persons) {
-            Address address = person.getAddress();
-            if (address == currentAddress) {
-                personList.add(person);
-            }
-        }
-        return personList;
-    }
 }

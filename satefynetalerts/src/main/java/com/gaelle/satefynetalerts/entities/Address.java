@@ -33,13 +33,12 @@ public class Address {
     @Size(max = 5)
     private String zip;
 
+//    @OneToMany(mappedBy = "address")
+//    private List<Person> personList;
+
     @Override
     public String toString() {
-        return "Address{" +
-                "address='" + address + '\'' +
-                ", city='" + city + '\'' +
-                ", zip='" + zip + '\'' +
-                '}';
+        return address + " " + city + " " + zip;
     }
 
 }

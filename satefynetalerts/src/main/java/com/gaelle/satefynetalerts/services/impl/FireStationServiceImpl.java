@@ -2,25 +2,27 @@ package com.gaelle.satefynetalerts.services.impl;
 
 import com.gaelle.satefynetalerts.entities.Address;
 import com.gaelle.satefynetalerts.entities.FireStation;
+import com.gaelle.satefynetalerts.entities.Person;
 import com.gaelle.satefynetalerts.repositories.AddressRepository;
 import com.gaelle.satefynetalerts.repositories.FireStationRepository;
+import com.gaelle.satefynetalerts.repositories.PersonRepository;
 import com.gaelle.satefynetalerts.services.AddressService;
 import com.gaelle.satefynetalerts.services.FireStationService;
+import com.gaelle.satefynetalerts.services.PersonService;
+import com.gaelle.satefynetalerts.utils.DataUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FireStationServiceImpl implements FireStationService {
     @Autowired
-    FireStationRepository fireStationRepository;
+    private FireStationRepository fireStationRepository;
     @Autowired
-    AddressRepository addressRepository;
-    @Autowired
-    AddressService addressService;
+    private AddressRepository addressRepository;
+
+
 
     @Override
     public FireStation getFireStation(Long id) {
@@ -32,6 +34,7 @@ public class FireStationServiceImpl implements FireStationService {
     public List<FireStation> getFireStations() {
         return fireStationRepository.findAll();
     }
+
 
     @Override
     public FireStation getFireStationByAddress(Long id) {
