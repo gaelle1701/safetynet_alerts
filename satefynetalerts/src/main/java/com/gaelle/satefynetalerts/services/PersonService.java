@@ -23,4 +23,5 @@ public interface PersonService {
     List<String> getEmailList(String city);
 
 
+    List<String> getPhoneList(String phone);
 }

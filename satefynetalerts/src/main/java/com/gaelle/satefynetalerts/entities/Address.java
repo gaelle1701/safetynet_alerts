@@ -33,8 +33,6 @@ public class Address {
     @Size(max = 5)
     private String zip;
 
-//    @OneToMany(mappedBy = "address")
-//    private List<Person> personList;
 
     @Override
     public String toString() {

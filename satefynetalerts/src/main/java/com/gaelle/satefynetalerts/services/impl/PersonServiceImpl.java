@@ -77,6 +77,18 @@ public class PersonServiceImpl implements PersonService {
         return emailList;
     }
 
+    @Override
+    public List<String> getPhoneList(String phone) {
+        List<String> phoneList = new ArrayList<>();
+
+        for (Person person : personRepository.findAll()){
+            if(person.getPersonId().getPhone().equals(phone)){
+                phoneList.add(person.getPersonId().getPhone());
+            }
+        }
+        return phoneList;
+    }
+
 
     @Override
     public Person createPerson(PersonDto personDto, Role role) {
