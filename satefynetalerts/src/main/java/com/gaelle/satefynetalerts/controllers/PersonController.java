@@ -46,7 +46,7 @@ public class PersonController {
         return ResponseEntity.ok(personList);
     }
 
-    @PostMapping("create/user")
+    @PostMapping("create/person")
     public ResponseEntity<Person> createPerson(@RequestBody PersonDto personDto) {
         Role role = roleRepository.getById(1);
         Person newPerson = personService.createPerson(personDto, role);

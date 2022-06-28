@@ -55,7 +55,7 @@
       "birthdate": "03/06/1984",
       "password": "1234",
       "addressId": 1,
-      "medications":["aznol:350mg", "hydrapermazol:100mg"],
+      "medications":["aznol:350mg", " hydrapermazol:100mg"],
       "allergies":["nillacilan"]
     },
     {
@@ -66,7 +66,7 @@
       "birthdate": "03/06/1989",
       "password": "1234",
       "addressId": 1,
-      "medications":["pharmacol:5000mg", "terazine:10mg", "noznazol:250mg"],
+      "medications":["pharmacol:5000mg", " terazine:10mg", " noznazol:250mg"],
       "allergies":[]
     },
     {
@@ -150,7 +150,7 @@
       "birthdate": "03/06/1994",
       "password": "1234",
       "addressId": 6,
-      "medications":["hydrapermazol:300mg", "dodoxadin:30mg"],
+      "medications":["hydrapermazol:300mg", " dodoxadin:30mg"],
       "allergies":["shellfish"]
     },
     {
@@ -171,8 +171,8 @@
       "birthdate": "03/06/1988",
       "password": "1234",
       "addressId": 8,
-      "medications":["aznol:60mg", "hydrapermazol:900mg", "pharmacol:5000mg", "terazine:500mg"],
-      "allergies":["peanut", "shellfish", "aznol"]
+      "medications":["aznol:60mg", " hydrapermazol:900mg", " pharmacol:5000mg", " terazine:500mg"],
+      "allergies":["peanut", " shellfish", " aznol"]
     },
     {
       "firstName": "Warren",
@@ -242,7 +242,7 @@
       "birthdate": "12/06/1975",
       "password": "1234",
       "addressId": 11,
-      "medications":["ibupurin:200mg", "hydrapermazol:400mg"],
+      "medications":["ibupurin:200mg", " hydrapermazol:400mg"],
       "allergies":["nillacilan"]
     },
     {
@@ -263,7 +263,7 @@
       "birthdate": "03/06/2014",
       "password": "1234",
       "addressId": 10,
-      "medications":["noxidian:100mg", "pharmacol:2500mg"], "allergies":[]
+      "medications":["noxidian:100mg", " pharmacol:2500mg"], "allergies":[]
     },
     {
       "firstName": "Clive",

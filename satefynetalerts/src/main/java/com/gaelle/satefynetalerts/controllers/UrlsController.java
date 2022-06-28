@@ -37,7 +37,6 @@ public class UrlsController {
         return ResponseEntity.ok(childrenList);
     }
 
-
 //    http://localhost:8080/phoneAlert?firestation=<firestation_number>
 //    Cette url doit retourner une liste des numéros de téléphone des résidents desservis par la caserne de
 //    pompiers. Nous l'utiliserons pour envoyer des messages texte d'urgence à des foyers spécifiques.
@@ -47,14 +46,12 @@ public class UrlsController {
         return  ResponseEntity.ok(phoneList);
     }
 
-
 //    http://localhost:8080/communityEmail?city=<city>
     @GetMapping("communityEmail")
     public ResponseEntity<List<String>> getEmailList(@RequestParam String city){
         List<String> emailList = personService.getEmailList(city);
         return ResponseEntity.ok(emailList);
     }
-
 
 //    http://localhost:8080/fire?address=<address>
 //    Cette url doit retourner la liste des habitants vivant à l’adresse donnée ainsi que le numéro de la caserne
@@ -65,6 +62,7 @@ public class UrlsController {
         Map<String, Object> personList = urlService.getPersonByAddress(address);
         return ResponseEntity.ok(personList);
     }
+
 //    http://localhost:8080/flood/stations?stations=<a list of station_numbers>
 //    Cette url doit retourner une liste de tous les foyers desservis par la caserne. Cette liste doit regrouper les
 //    personnes par adresse. Elle doit aussi inclure le nom, le numéro de téléphone et l'âge des habitants, et
